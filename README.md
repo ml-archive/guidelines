@@ -48,7 +48,7 @@ Are you feeling hockey? punk!?. We ALWAYS integrate hockey (even though its kind
  - Does the app handle missing internet connection properly?
  - Does the app handle a slow internet connection properly?
  - Double check views are not clipping on small phones. (Add scrollviews where needed)
- - App.Debug = false
+ - App.Debug = false (in never apps use BuildConfig.DEBUG and made sure you don't import the BuildConfig from an included proect, this way it will automatically get set)
  - Check Map views with release key
  - Make sure all social-media keys are correct(SHA-1 ect)
  - App version name / code correctly set (http://semver.org/)
