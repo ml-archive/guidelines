@@ -45,5 +45,3 @@ Are you feeling hockey? punk!?. We ALWAYS integrate hockey (even though its kind
  - Check for libraries included multiple times
  - Make sure you run the APK you ship at least once.
  - Upload keystore file to Google drive / Include password (https://drive.google.com/open?id=0B09IfosUwe8iSXVxUWR6am9wSmc)
-
-
