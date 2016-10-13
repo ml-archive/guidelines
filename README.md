@@ -28,6 +28,7 @@ to show and hide the bar. Just use a regular goddamn toolbar and deal with few e
 - Max 2 or 3 indentation levels per function, avoid arrow code, make more functions.
 - Isolate frequently repeated blocks of code into a function.
 - Do not implement minor listeners on the Fragment/Activity. Eg Activity implements View.OnClickListener is a no go.
+- Do not fill framework classes with business logic and junk. Make a controller class or even better use MVP. Your advanced activity doesn't have to be fully implemented inside AdvancedActivity.java. Apply some architecture and design, we're not douchebag webdevelopers.
 
 
 ### Commonly used thirdparty libs
