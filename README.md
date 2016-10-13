@@ -24,6 +24,7 @@ Way of structuring business logic, data storage and presentation (UI) in a way t
 ### Anti Patterns
 - Support action bar. Please don't use it. The system handled action bars causes a lot of problems when you wan't
 to show and hide the bar. Just use a regular goddamn toolbar and deal with few extra lines of setup code.
+- Do not implement entire screens worth of UI inside a RecyclerView.Adapter :P
 
 
 ### Commonly used thirdparty libs
