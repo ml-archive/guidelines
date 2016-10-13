@@ -27,6 +27,7 @@ to show and hide the bar. Just use a regular goddamn toolbar and deal with few e
 - Do not implement entire screens worth of UI inside a RecyclerView.Adapter :P
 - Max 2 or 3 indentation levels per function, avoid arrow code, make more functions.
 - Isolate frequently repeated blocks of code into a function.
+- Do not implement minor listeners on the Fragment/Activity. Eg Activity implements View.OnClickListener is a no go.
 
 
 ### Commonly used thirdparty libs
