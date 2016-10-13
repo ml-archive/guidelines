@@ -5,6 +5,11 @@
 com._clientname_._appname_ /
 dk._clientname_._appname_
 
+### Keystore
+
+ 1. Create a keystore in AS with an alias name.
+ 2. Upload/Find keystores to Google Drive here: https://drive.google.com/open?id=0B09IfosUwe8iSXVxUWR6am9wSmc 
+ 3. Create a doc with the passwords/aliases
 
 ### NStack setup
 
