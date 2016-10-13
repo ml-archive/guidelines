@@ -10,6 +10,11 @@ dk._clientname_._appname_
 
 TODO
 
+### Patterns
+#### MVP
+Way of structuring business logic, data storage and presentation (UI) in a way that makes a lot of sense on larger projects. USE IT. Examples:
+
+- http://git.ournodes.com/android/mvp_rx_sample Basic app template using MVP
 
 ### 
 
