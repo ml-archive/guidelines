@@ -21,7 +21,9 @@ Way of structuring business logic, data storage and presentation (UI) in a way t
 
 - http://git.ournodes.com/android/mvp_rx_sample Basic app template using MVP
 
-### 
+### Anti Patterns
+- Support action bar. Please don't use it. The system handled action bars causes a lot of problems when you wan't
+to show and hide the bar. Just use a regular goddamn toolbar and deal with few extra lines of setup code.
 
 
 ### Commonly used thirdparty libs
