@@ -21,15 +21,12 @@ Way of structuring business logic, data storage and presentation (UI) in a way t
 
 - http://git.ournodes.com/android/mvp_rx_sample Basic app template using MVP
 
-### Avoid Anti Patterns
-- Support action bar. Please don't use it. The system handled action bars causes a lot of problems when you wan't
-to show and hide the bar. Just use a regular goddamn toolbar and deal with few extra lines of setup code.
-- Do not implement entire screens worth of UI inside a RecyclerView.Adapter :P
-- Max 2 or 3 indentation levels per function, avoid arrow code, make more functions.
-- Isolate frequently repeated blocks of code into a function.
-- Do not implement minor listeners on the Fragment/Activity. Eg Activity implements View.OnClickListener is a no go.
-- Do not fill framework classes with business logic and junk. Make a controller class or even better use MVP. Your advanced activity doesn't have to be fully implemented inside AdvancedActivity.java. Apply some architecture and design, we're not douchebag webdevelopers.
-
+### Anti Patterns (Do not do or use) - X, Alternative and Reason
+- Support action bar. Toolbar. The system handled action bars causes a lot of problems when you wan't to show and hide the bar.
+- Whole Screen inside a Recyclerview. Coordinator layout. Harder to read and to mantain.
+- Hardcode colors. Make a resource colour instead and a style if needed. Easier when creating flavour or app reskin.
+- Listviews. Use Recyclerviews instead. Better performance and readability.
+- Relativelayout. Use Framelayout and/or Linearlayout instead (if possible). Better performance and readability.
 
 ### Commonly used thirdparty libs
 #### New Relic
@@ -50,11 +47,10 @@ Are you feeling hockey? punk!?. We ALWAYS integrate hockey (even though its kind
  - Does the app handle missing internet connection properly?
  - Does the app handle a slow internet connection properly?
  - Double check views are not clipping on small phones. (Add scrollviews where needed)
- - App.Debug = false (in never apps use BuildConfig.DEBUG and made sure you don't import the BuildConfig from an included proect, this way it will automatically get set)
+ - App.Debug = false
  - Check Map views with release key
  - Make sure all social-media keys are correct(SHA-1 ect)
  - App version name / code correctly set (http://semver.org/)
  - Check for libraries included multiple times
  - Make sure you run the APK you ship at least once.
  - Upload keystore file to Google drive / Include password (https://drive.google.com/open?id=0B09IfosUwe8iSXVxUWR6am9wSmc)
- - Does the app need to upgrade any database schemes / own fileformats? remember to test ALL possible upgrade paths. Write update hooks for sqlite db's etc.
