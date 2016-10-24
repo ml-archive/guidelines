@@ -37,7 +37,7 @@ ProTip: Use BuildConfig.DEBUG to turn it off on debug builds because its debug o
 #### HockeyApp integration
 Are you feeling hockey? punk!?. We ALWAYS integrate hockey (even though its kindda lame). Remember to differentiate your initialization based on the BuildConfig.DEBUG flag. In debug mode you want the crash submission dialog as well as the update check. On release builds on the other hand you want silently uploaded (sneaky) crash reports and no update checking. (yo, use nstack b) 
 
-#### Proguard integration
+### Proguard integration
 We need to use proguard in our release builds to get rid of unused code and obfuscate the rest of it so you can't reverse engineer the apk. There's a proguard template for the most common libraries we use on the Nodes Template project (https://git.nodescloud.com/android/templateproject).
 
 Basically there's a proguard folder in the root of the project **(make sure you update .gitignore if adding this setup to an existing project as this folder was being ignored in previous versions)** that contains a rules file for each of the libraries we use. Just delete the ones you don't need.
