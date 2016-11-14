@@ -74,27 +74,8 @@ If you find any issues with proguard in any project regarding a specific library
  - Check for libraries included multiple times
  - Make sure you run the APK you ship at least once.
  - Upload keystore file to Google drive / Include password (https://drive.google.com/open?id=0B09IfosUwe8iSXVxUWR6am9wSmc) 
-
-# Nodes Android
-
-
-We love what we do and care about the products we create. They are a team effort, together with our designers, backend developers, project managers, and all the other people at Nodes. 
-
-We try to write clean code and separate the pieces of code that occur often in our apps into separate libraries that can be reused in other projects. Our open source activity can be found on [GitHub](https://github.com/nodes-ios).
-
-We try to increase our contribution to the iOS developer community through:
-
-- abstracting relevant parts of our code and turning them into open source libraries that other developers can use
-- encouraging our team members to join iOS related meetups, groups and conferences
-- encouraging our team members to speak at iOS events
-- contributing back to some of the other open source libraries we use through issues and PRs
-- encouraging our team members to write tech articles about any topic they desire on our [engineering blog](https://engineering.nodesagency.com/)
-
-We create lots of apps for our clients. Most of those apps rely heavily on web APIs. We abstracted the common operations for working with web APIs, and that's how [Serializable](https://github.com/nodes-ios/Serializable) and [Cashier](https://github.com/nodes-ios/Cashier) were born. Another issue that was common in all the apps we do was handling keyboard appearance events. This led to the appearance of [KeyboardHelper](https://github.com/nodes-ios/KeyboardHelper).
-
-We are currently in the process of abstracting parts of our codebase into open source libraries that can be reused in other projects. As well as this, we are trying to change our way of thinking for current and future projects and when we encounter a feature whose implementation can be reused in other projects we try to implement it as a separate component which we open source. We are just beginning, and it is a big change, but this is what we aim for in the long run.
-
-
+ 
+ 
 # Team meetings
 Here are the recurring meetings the Android team takes part in:
 
