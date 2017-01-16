@@ -124,7 +124,7 @@ Depending if you are in London, Copenhagen or Aarhus you will have other meeting
 
 [**NStack**](https://nstack.io/) is a service we built and it is the tool we use for doing localisation. Together with the [**NStack SDK**](https://github.com/nodes-android/NStack) it offers dynamic localisation for our apps and other usefull functionalities. If you go to [nstack.io](https://nstack.io/) and select your project and translate, you will be able to add new sections with new Translations. These translations can be changed in NStack and the changes will reflect in the app without the need of an app update.
 
-
+[Android-CI](https://git.nodescloud.com/android/android-ci) Set of scripts used together with the gitlab CI runner to provide automatic build and deployment. See the link for information about how to setup or check the template project (or any project having a file called .gitlab-ci.yml in the root really.
 
 # Coding Guidelines
 Make sure to read our [**Android Style Guide**](styleguide.md).  
