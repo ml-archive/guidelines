@@ -27,6 +27,18 @@ Way of structuring business logic, data storage and presentation (UI) in a way t
 - Don't use Listviews. Use Recyclerviews instead, they have a better performance and readability.
 - Avoid using Relativelayout if its not needed. Use Framelayout and/or Linearlayout instead, they have a better performance and makes the UI much more readable.
 
+### Commonly used libraries developed by Nodes
+[**NStack SDK**](https://github.com/nodes-android/NStack) Offers dynamic localisation for our apps and other useful functionalities. If you go to [nstack.io](https://nstack.io/) and select your project and translate, you will be able to add new sections with new Translations. These translations can be changed in NStack and the changes will reflect in the app without the need of an app update.
+
+[**okhttputils**](https://github.com/nodes-android/okhttputils) Collection of often used utilities for okhttp or related to communicating with a backend over HTTP. This contain logging interceptors for error logging as well as a generic error handler and retrofit helpers.
+
+[**filepicker**](https://github.com/nodes-android/filepicker) As the title goes it is a library for picking a file and getting a URI back. Also deals with special and very complicated case of obtaining and image from the camera on Android.
+Does not yet support SAF, but its in the pipeline.
+
+[**nutils**](https://github.com/nodes-android/nutils) nutils contains often used smaller pieces of code which can't be anywhere else.
+
+[**gutenberg**](https://github.com/nodes-android/gutenberg) Our font loading and setting library. If your app uses custom fonts, you need this.
+
 ### Commonly used thirdparty libs
 #### New Relic
 This horrible piece of software uses an extra evil brand of reflection to look at your apps HTTP communication, intercepting errors and uploading them to some horrible cloud interface Toby looks at error now and then. This should be added when we're dealing with an externally developed API. For evidence gathering.
@@ -59,7 +71,7 @@ If you find any issues with proguard in any project regarding a specific library
 
 ## Upload checklist
 
- - App.Debug = false
+ - App.Debug = false (or better App.Debug = BuildConfig.DEBUG)
  - Analytics is tracking
  - Hockey is correctly added (Tracking crash reports, version alerts should be disabled by the Debug flag)
  - Install on top of old cached app if it is an update to check its behaviour (QA should already have checked this)
@@ -94,7 +106,6 @@ This is a quarterly meeting, where the board tells all the employees how the com
 Depending if you are in London, Copenhagen or Aarhus you will have other meetings. Make sure you are updated on the different ones that haven;t been included here.
 
 
-
 # Your First Day
 - Start by installing Android Studio and the different tools that we use, see Tools we use
 - Ask [Johnny](https://nodes.slack.com/messages/@joso) to invite you to [our private git](https://git.nodescloud.com). He will add you to the correct groups. Here is where we have our client projects.
@@ -124,7 +135,7 @@ Depending if you are in London, Copenhagen or Aarhus you will have other meeting
 
 [**NStack**](https://nstack.io/) is a service we built and it is the tool we use for doing localisation. Together with the [**NStack SDK**](https://github.com/nodes-android/NStack) it offers dynamic localisation for our apps and other usefull functionalities. If you go to [nstack.io](https://nstack.io/) and select your project and translate, you will be able to add new sections with new Translations. These translations can be changed in NStack and the changes will reflect in the app without the need of an app update.
 
-[Android-CI](https://git.nodescloud.com/android/android-ci) Set of scripts used together with the gitlab CI runner to provide automatic build and deployment. See the link for information about how to setup or check the template project (or any project having a file called .gitlab-ci.yml in the root really.
+[**Android-CI**](https://git.nodescloud.com/android/android-ci) Set of scripts used together with the gitlab CI runner to provide automatic build and deployment. See the link for information about how to setup or check the template project (or any project having a file called .gitlab-ci.yml in the root really.
 
 # Coding Guidelines
 Make sure to read our [**Android Style Guide**](styleguide.md).  
