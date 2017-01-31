@@ -16,9 +16,18 @@ See NSTACK
 
 ### Patterns
 #### MVP
-Way of structuring business logic, data storage and presentation (UI) in a way that makes a lot of sense on larger projects. It is mandatory. Example:
+Way of structuring business logic, data storage and presentation (UI) in a way that makes a lot of sense on larger projects. It is mandatory.
+
+It is important to understand how repositories work and what is their role in a project. Failing to understand this will end up with huge presenters taking all of the burden.
+
+Interactors are a plus, should be considered on large projects.
+
+Example:
 
 - http://git.ournodes.com/android/mvp_rx_sample Basic app template using MVP
+- https://git.nodescloud.com/android/linak-desk-control.git Example
+- https://git.nodescloud.com/android/dk-fitness-app.git Another Example
+- https://git.nodescloud.com/android/taxa4x35.git Another Example
 
 ### Don't:
 - Use Support action bar. Use the Toolbar instead.
