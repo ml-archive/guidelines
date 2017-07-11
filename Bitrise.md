@@ -24,7 +24,7 @@ If you haven't been invited to bitrise.io, please contact your tech lead or mana
 The gradle plugin in short filters and builds whatever flavor / buildtype mix you want. After having completed each build, it outputs the build info into a shared JSON file on the CI server. 
 
 The JSON format is in the form:
-```
+```json
 [{
     "build": "app-staging.apk",
     "hockeyId": "yourKeyShouldGoHere",
@@ -38,29 +38,29 @@ This is later used for the Hockey deployment utils for uploading apks for each d
 ## build.gradle setup
 
 Add the dependency to the (Project) `build.gradle`
-```
+```groovy
 buildscript {
-    ...
+    // ...
     dependencies {
-        ...
+        // ...
         classpath 'dk.nodes.ci:bitrise:0.92'
     }
 }
 ```
 
 Setup and apply the plugin in (App) `build.gradle`
-```
+```groovy
 apply plugin: 'dk.nodes.ci.bitrise'
 ```
 
 Add Hockey Id's and what buildtype you want to deploy for each flavor:
-```
+```groovy
 hockeyAppId = "11111111111111111111"
 deploy = "debug"
 ```
 
 _*OPTIONAL.*_ You can setup defaults in the `bitrise` block. This is useful if you have many flavors and only want to build some of them.
-```
+```groovy
 bitrise {
     // Our default deployment if none is specified in the flavor config
     defaultDeployMode = "release|staging"
@@ -80,7 +80,7 @@ We also have two different buildtypes, the debug version and the release version
   - stagingDebug
   - productionRelease
   
-```
+```groovy
 productFlavors {
     staging {
         // bitrise gradle options
