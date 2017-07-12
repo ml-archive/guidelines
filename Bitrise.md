@@ -13,7 +13,7 @@ If you haven't been invited to bitrise.io, please contact your tech lead or mana
 8) Abort the first build it kicks off
 
 ## Setup workflow
-1) Go to the first dashboard by clicking on Dashboard / <app name>
+1) Go to the first dashboard by clicking on Dashboard > *app name*
 2) Open "Workflow Editor" & open "Secrets"
 3) Make two keys `HOCKEY_TOKEN` and `SLACK_WEBHOOK_URL`. Copy the values from one of the other projects.
 4) *OPTIONAL* Go to "Env Vars" and add `PROJECT_SLACK_CHANNEL` in *App Environment Variables*. Set it to the project channel on slack. It will post to #bitrise if you dont.
