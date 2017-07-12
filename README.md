@@ -32,7 +32,7 @@ Example:
 ### Don't:
 - Use Support action bar. Use the Toolbar instead.
 - Making the whole screen inside a Recyclerview. Keep it simple and try to use the Coordinator layout.
-- Hardcode colors, margins, strings etc. Make use of the appropiate resource directory and file for each case and think wisely on the styles that make most sense to have. This will save a huge amount of time when creating flavours or making apps reskins.
+- Hardcode colors, margins, strings etc. Make use of the appropriate resource directory and file for each case and think wisely on the styles that make most sense to have. This will save a huge amount of time when creating flavours or making apps reskins.
 - Don't use Listviews. Use Recyclerviews instead, they have a better performance and readability.
 - Avoid using Relativelayout if its not needed. Use Framelayout and/or Linearlayout instead, they have a better performance and makes the UI much more readable.
 
@@ -55,7 +55,7 @@ This horrible piece of software uses an extra evil brand of reflection to look a
 ProTip: Use BuildConfig.DEBUG to turn it off on debug builds because its debug output is infuriatingly annoying and it stackthraces all over the place.
 
 #### HockeyApp integration
-Are you feeling hockey? punk!?. We ALWAYS integrate hockey (even though its kindda lame). Remember to differentiate your initialization based on the BuildConfig.DEBUG flag. In debug mode you want the crash submission dialog as well as the update check. On release builds on the other hand you want silently uploaded (sneaky) crash reports and no update checking. (yo, use nstack b) 
+Are you feeling hockey? punk!?. We ALWAYS integrate hockey. Remember to differentiate your initialization based on the BuildConfig.DEBUG flag. In debug mode you want the crash submission dialog as well as the update check. On release builds on the other hand you want silently uploaded (sneaky) crash reports and no update checking. (yo, use nstack b) 
 
 ### Proguard integration
 We use proguard in our release builds to get rid of unused code and obfuscate code. There's a proguard template for the most common libraries we use on the Nodes Template project (https://git.nodescloud.com/android/templateproject).
