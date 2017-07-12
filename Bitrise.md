@@ -37,7 +37,7 @@ This is later used for the Hockey deployment utils for uploading apks for each d
 
 ## build.gradle setup
 
-Add the dependency to the (Project) `build.gradle`
+Add the dependency to the (Project) `build.gradle`. Check the [the latest version here](https://github.com/nodes-android/ci-bitrise-gradle-plugin/blob/master/build.gradle#L19)
 ```groovy
 buildscript {
     // ...
