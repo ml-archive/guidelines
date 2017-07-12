@@ -19,6 +19,13 @@ If you haven't been invited to bitrise.io, please contact your tech lead or mana
 4) *OPTIONAL* Go to "Env Vars" and add `PROJECT_SLACK_CHANNEL` in *App Environment Variables*. Set it to the project channel on slack. It will post to #bitrise if you dont.
 5) Go to *bitrise.yml* and paste in this gist: https://gist.github.com/johsoe/b294b791adeda5c6792b79ad9920c8e3
 
+## How to kick off a build
+There's two ways to kick off a build with the above gist:
+1) Push a tag in [SEMVER](http://semver.org/) format, i.e. `1.0.0`
+2) Manually open Bitrise and start a build. (Can be necessary in case something goes wrong, or whatever)
+
+With the tags, we get a nice overview of all the different builds and have an easier way of doing roll backs on the master branch.
+
 # Gradle plugin
 
 The gradle plugin in short filters and builds whatever flavor / buildtype mix you want. After having completed each build, it outputs the build info into a shared JSON file on the CI server. 
