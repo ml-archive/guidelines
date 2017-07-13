@@ -144,14 +144,17 @@ Depending if you are in London, Copenhagen or Aarhus you will have other meeting
 
 [**NStack**](https://nstack.io/) is a service we built and it is the tool we use for doing localisation. Together with the [**NStack SDK**](https://github.com/nodes-android/NStack) it offers dynamic localisation for our apps and other usefull functionalities. If you go to [nstack.io](https://nstack.io/) and select your project and translate, you will be able to add new sections with new Translations. These translations can be changed in NStack and the changes will reflect in the app without the need of an app update.
 
-[**Android-CI**](https://git.nodescloud.com/android/android-ci) Set of scripts used together with the gitlab CI runner to provide automatic build and deployment. See the link for information about how to setup or check the template project (or any project having a file called .gitlab-ci.yml in the root really.
-
 # Coding Guidelines
 Make sure to read our [**Android Style Guide**](styleguide.md).  
 
 
 # Nodes CI
-The Nodes CI is our new continuous integration tool. This was built mostly by Johnny. Since it's still new, we don't really use it in many of our projects. Once we have CI included in our template project we will make sure to explain it so we can implement it on ongoing and future projects.
+Our CI system is now hosted by Bitrise. We have several tools and scripts used for building and deploying.
+
+ - [Gradle build plugin](https://github.com/nodes-android/ci-bitrise-gradle-plugin)
+ - [Deploy bitrise step (ruby)](https://github.com/nodes-android/ci-bitrise-deploy-step)
+ 
+ We have a [guide for setting up the CI](https://github.com/nodes-android/guidelines/blob/master/Bitrise.md)
 
 
 # Working at Nodes
