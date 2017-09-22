@@ -16,7 +16,6 @@ See [NSTACK](https://github.com/nodes-android/nstack)
 
 We have a rewritten smaller version of nstack in Kotlin [https://github.com/nodes-android/kstack](https://github.com/nodes-android/kstack). Going forward this is the version of nstack we'll improve and work on.
 
-
 ### Patterns
 #### MVP
 Way of structuring business logic, data storage and presentation (UI) in a way that makes a lot of sense on larger projects. It is mandatory.
@@ -27,14 +26,11 @@ Interactors are a plus, should be considered on large projects.
 
 #### Clean architecture
 On the bigger enterprise projects, most of the clean arch patterns help provide modularity and provide a better base for unit testing.
-
  - Interactors are a must for small isolated pieces of work. Have them do one task only and test that.
  - Every model should have a Repository for CRUD'ing over disk/network
  - Keep Presenters as small as possible and try to make then be the connection between interactors and the view.
 
 Examples on nodes-projects:
-
-- http://git.ournodes.com/android/mvp_rx_sample Basic app template using MVP
 - Linak Desk Control (MVP)
 - Fitness DK (MVP)
 - Taxa 4x35 (MVP, rx, repos)
@@ -113,9 +109,9 @@ Here are the recurring meetings the Android team takes part in:
 #### Android Team Meeting
 This is the main meeting in the Android team, where we talk about the latest things happening in our team. General direction of the team, brief general team performance review, what people need help with, amount of workload, should we use or not _that_ framework, etc. It happens every month.
 
-#### Monthly Tech Talks
+#### Production meetings
 
-The Tech Talks is a monthly meeting where all our developers and QA take part. Each month, another team has the agenda, and they talk about something relevant to their domain, but which can affect all of us. We try to maximize the knowledge sharing so we can all become better together. 
+The production meetings is a bi-monthly meeting where all our developers and QA take part. Each meeting, another team has the agenda, and they talk about something relevant to their domain, but which can affect all of us. We try to maximize the knowledge sharing so we can all become better together. 
 
 #### Quarterly Company Catch-up
 
