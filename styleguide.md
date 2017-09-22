@@ -1,13 +1,13 @@
 # Android style guide
 
- - [Package structure](#packagestructure)
+ - [Package structure](#package-structure)
  - [Constants](#constants)
- - [Injection](#packagestructure)
- - [Unit testing](#packagestructure)
+ - [Injection](#injection)
+ - [Unit testing](#unit-testing)
  - [Repositories](#repositories)
- - [Interactors](#packagestructure)
- - [Caching](#packagestructure)
- - [Error handling](#errorhandling)
+ - [Interactors](#interactors)
+ - [Caching](#caching)
+ - [Error handling](#error-handling)
 
 ## Package structure [](#){name=packagestructure}
 
@@ -71,19 +71,19 @@ public class IntentKeys {
 
 ```
 
-## Injection [](#){name=injection}
+## Injection 
 
 ### Contructor injection
 
 ### Injecting the presenters
 
-## Unit testing [](#){name=unittesting}
+## Unit testing 
 
-## Repositories [](#){name=repositories}
+## Repositories 
 
-## Interactors [](#){name=interactors}
+## Interactors 
 
-## Caching [](#){name=caching}
+## Caching 
 
-## Error handling [](#){name=errorhandling}
+## Error handling 
 
