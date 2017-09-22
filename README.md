@@ -30,19 +30,11 @@ On the bigger enterprise projects, most of the clean arch patterns help provide 
  - Every model should have a Repository for CRUD'ing over disk/network
  - Keep Presenters as small as possible and try to make then be the connection between interactors and the view.
 
-Examples on nodes-projects:
-- Linak Desk Control (MVP)
-- Fitness DK (MVP)
-- Taxa 4x35 (MVP, rx, repos)
+### Stack
 
-### Don't:
-- Use Support action bar. Use the Toolbar instead.
-- Making the whole screen inside a Recyclerview. Keep it simple and try to use the Coordinator layout.
-- Hardcode colors, margins, strings etc. Make use of the appropriate resource directory and file for each case and think wisely on the styles that make most sense to have. This will save a huge amount of time when creating flavours or making apps reskins.
-- Use Listviews. Use Recyclerviews instead, they have a better performance and readability.
-- Use RelativeLayout everywhere. Use Framelayout and/or Linearlayout instead, they have a better performance and makes the UI much more readable.
+Check out our blog for a quick run through of our [internal stack](https://engineering.nodesagency.com/our-stacks/android/)
 
-### Commonly used libraries developed by Nodes
+### Commonly used open source libraries developed by Nodes
 [**NStack SDK**](https://github.com/nodes-android/NStack) Offers dynamic localisation for our apps and other useful functionalities. If you go to [nstack.io](https://nstack.io/) and select your project and translate, you will be able to add new sections with new Translations. These translations can be changed in NStack and the changes will reflect in the app without the need of an app update.
 
 [**okhttputils**](https://github.com/nodes-android/okhttputils) Collection of often used utilities for okhttp or related to communicating with a backend over HTTP. This contain logging interceptors for error logging as well as a generic error handler and retrofit helpers.
