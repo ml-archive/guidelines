@@ -1,9 +1,15 @@
 # Android style guide
 
+ - [Package structure](#packagestructure)
+ - [Constants](#constants)
+ - [Injection](#packagestructure)
+ - [Unit testing](#packagestructure)
+ - [Repositories](#repositories)
+ - [Interactors](#packagestructure)
+ - [Caching](#packagestructure)
+ - [Error handling](#errorhandling)
 
-### Package structure
-
-_WIP_
+## Package structure [](#){name=packagestructure}
 
  - dk.company.appname
     - base
@@ -26,9 +32,9 @@ _WIP_
              - MainActivity.java
         - App.java
 
-### Constants
+## Constants [](#){name=constants}
 
-#### Environment keys/constants
+### Environment keys/constants
 
 Keys or constants that change depending on environment / flavor should be put in the `build.gradle` file.
 
@@ -64,3 +70,20 @@ public class IntentKeys {
 }
 
 ```
+
+## Injection [](#){name=injection}
+
+### Contructor injection
+
+### Injecting the presenters
+
+## Unit testing [](#){name=unittesting}
+
+## Repositories [](#){name=repositories}
+
+## Interactors [](#){name=interactors}
+
+## Caching [](#){name=caching}
+
+## Error handling [](#){name=errorhandling}
+
