@@ -1,4 +1,4 @@
-# Android project guidelines
+# Playbook
 
 ### Package naming
 
