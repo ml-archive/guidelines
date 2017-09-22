@@ -29,6 +29,7 @@ On the bigger enterprise projects, most of the clean arch patterns help provide 
  - Interactors are a must for small isolated pieces of work. Have them do one task only and test that.
  - Every model should have a Repository for CRUD'ing over disk/network
  - Keep Presenters as small as possible and try to make then be the connection between interactors and the view.
+ - Use Dagger to maintain your object instantiation in a central place. This becomes even more important in larger projects.
 
 ### Stack
 
