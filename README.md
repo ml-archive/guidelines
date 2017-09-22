@@ -12,7 +12,10 @@ dk._clientname_._appname_
  3. Create a doc with the passwords/aliases
 
 ### NStack setup
-See NSTACK
+See [NSTACK](https://github.com/nodes-android/nstack)
+
+We have a rewritten smaller version of nstack in Kotlin [https://github.com/nodes-android/kstack](https://github.com/nodes-android/kstack). Going forward this is the version of nstack we'll improve and work on.
+
 
 ### Patterns
 #### MVP
@@ -22,19 +25,26 @@ It is important to understand how repositories work and what is their role in a 
 
 Interactors are a plus, should be considered on large projects.
 
-Example:
+#### Clean architecture
+On the bigger enterprise projects, most of the clean arch patterns help provide modularity and provide a better base for unit testing.
+
+ - Interactors are a must for small isolated pieces of work. Have them do one task only and test that.
+ - Every model should have a Repository for CRUD'ing over disk/network
+ - Keep Presenters as small as possible and try to make then be the connection between interactors and the view.
+
+Examples on nodes-projects:
 
 - http://git.ournodes.com/android/mvp_rx_sample Basic app template using MVP
-- https://git.nodescloud.com/android/linak-desk-control.git Example
-- https://git.nodescloud.com/android/dk-fitness-app.git Another Example
-- https://git.nodescloud.com/android/taxa4x35.git Another Example
+- Linak Desk Control (MVP)
+- Fitness DK (MVP)
+- Taxa 4x35 (MVP, rx, repos)
 
 ### Don't:
 - Use Support action bar. Use the Toolbar instead.
 - Making the whole screen inside a Recyclerview. Keep it simple and try to use the Coordinator layout.
 - Hardcode colors, margins, strings etc. Make use of the appropriate resource directory and file for each case and think wisely on the styles that make most sense to have. This will save a huge amount of time when creating flavours or making apps reskins.
-- Don't use Listviews. Use Recyclerviews instead, they have a better performance and readability.
-- Avoid using Relativelayout if its not needed. Use Framelayout and/or Linearlayout instead, they have a better performance and makes the UI much more readable.
+- Use Listviews. Use Recyclerviews instead, they have a better performance and readability.
+- Use RelativeLayout everywhere. Use Framelayout and/or Linearlayout instead, they have a better performance and makes the UI much more readable.
 
 ### Commonly used libraries developed by Nodes
 [**NStack SDK**](https://github.com/nodes-android/NStack) Offers dynamic localisation for our apps and other useful functionalities. If you go to [nstack.io](https://nstack.io/) and select your project and translate, you will be able to add new sections with new Translations. These translations can be changed in NStack and the changes will reflect in the app without the need of an app update.
@@ -50,15 +60,15 @@ Does not yet support SAF, but its in the pipeline.
 
 ### Commonly used thirdparty libs
 #### New Relic
-This horrible piece of software uses an extra evil brand of reflection to look at your apps HTTP communication, intercepting errors and uploading them to some horrible cloud interface Toby looks at error now and then. This should be added when we're dealing with an externally developed API. For evidence gathering.
+This piece of software uses an brand of reflection to look at your apps HTTP communication, intercepting errors and uploading them to a cloud interface. This should be added when we're dealing with an externally developed API.
 
-ProTip: Use BuildConfig.DEBUG to turn it off on debug builds because its debug output is infuriatingly annoying and it stackthraces all over the place.
+ProTip: Use BuildConfig.DEBUG to turn it off on debug builds because its debug output is infuriatingly annoying and it stack traces all over the place.
 
 #### HockeyApp integration
-Are you feeling hockey? punk!?. We ALWAYS integrate hockey. Remember to differentiate your initialization based on the BuildConfig.DEBUG flag. In debug mode you want the crash submission dialog as well as the update check. On release builds on the other hand you want silently uploaded (sneaky) crash reports and no update checking. (yo, use nstack b) 
+We always integrate hockey. Remember to differentiate your initialization based on the BuildConfig.DEBUG flag. In debug mode you want the crash submission dialog as well as the update check. On release builds on the other hand you want silently uploaded (sneaky) crash reports and no update checking. 
 
 ### Proguard integration
-We use proguard in our release builds to get rid of unused code and obfuscate code. There's a proguard template for the most common libraries we use on the Nodes Template project (https://git.nodescloud.com/android/templateproject).
+We use proguard in our release builds to get rid of unused code and obfuscate code. There's a proguard template for the most common libraries we use on the Nodes Template project (https://github.com/nodes-projects/template-project-android).
 
 There is a proguard folder in the root of the project **(make sure you update .gitignore if adding this setup to an existing project as this folder was being ignored in previous versions)** that contains a rules file for each of the libraries we use. Just delete the ones you don't need.
 
@@ -80,8 +90,7 @@ If you find any issues with proguard in any project regarding a specific library
 
 ## Upload checklist
 
- - App.Debug = false (or better App.Debug = BuildConfig.DEBUG)
- - Analytics is tracking
+ - Analytics is tracking. Verify on Google Analytics website
  - Hockey is correctly added (Tracking crash reports, version alerts should be disabled by the Debug flag)
  - Install on top of old cached app if it is an update to check its behaviour (QA should already have checked this)
  - Confirm version number with PM
@@ -93,6 +102,7 @@ If you find any issues with proguard in any project regarding a specific library
  - Make sure all social-media keys are correct(SHA-1 ect)
  - App version name / code correctly set (http://semver.org/)
  - Check for libraries included multiple times
+ - Check production build of app for any proguard errors
  - Make sure you run the APK you ship at least once.
  - Upload keystore file to Google drive / Include password (https://drive.google.com/open?id=0B09IfosUwe8iSXVxUWR6am9wSmc) 
  
@@ -101,11 +111,11 @@ If you find any issues with proguard in any project regarding a specific library
 Here are the recurring meetings the Android team takes part in:
 
 #### Android Team Meeting
-This is the main meeting in the Android team, where we talk about the latest things happening in our team. General direction of the team, brief general team performance review, what people need help with, amount of workload, should we use or not _that_ framework, etc. It happens every 2 to 3 weeks.
+This is the main meeting in the Android team, where we talk about the latest things happening in our team. General direction of the team, brief general team performance review, what people need help with, amount of workload, should we use or not _that_ framework, etc. It happens every month.
 
 #### Monthly Tech Talks
 
-The Tech Talks is a monthly meeting where all our develoeprs and QA take part. Each month, another team has the agenda, and they talk about something relevant to their domain, but which can affect all of us. We try to maximize the knowledge sharing so we can all become better together. 
+The Tech Talks is a monthly meeting where all our developers and QA take part. Each month, another team has the agenda, and they talk about something relevant to their domain, but which can affect all of us. We try to maximize the knowledge sharing so we can all become better together. 
 
 #### Quarterly Company Catch-up
 
@@ -117,7 +127,7 @@ Depending if you are in London, Copenhagen or Aarhus you will have other meeting
 
 # Your First Day
 - Start by installing Android Studio and the different tools that we use, see Tools we use
-- Ask [Johnny](https://nodes.slack.com/messages/@joso) to invite you to [our private git](https://git.nodescloud.com). He will add you to the correct groups. Here is where we have our client projects.
+- Ask [Johnny](https://nodes.slack.com/messages/@joso) to invite you to [our private git](https://github.com/nodes-projects/). He will add you to the correct groups. Here is where we have our client projects.
 - Ask [Johnny](https://nodes.slack.com/messages/@joso) to invite you to [our GitHub organisation](https://github.com/nodes-android) so you can contribute to build great open source libraries. 
 - Ask [Johnny](https://nodes.slack.com/messages/@joso) to invite you to Hockey
 - Ask [Casper](https://nodes.slack.com/messages/@cr) for access to Postman
@@ -125,6 +135,7 @@ Depending if you are in London, Copenhagen or Aarhus you will have other meeting
 - Ask [Jonas](https://nodes.slack.com/messages/@josc) to add you to Slack and Ask [Johnny](https://nodes.slack.com/messages/@joso) to add you to the correct channels.
 - Make sure you read the [Nodes Handbook](https://docs.google.com/document/d/1E4ZyGqIKDttGlJ0c0rEkNy2lxP-n1PBwQzuaESbLnpw/edit) (private document). 
 - We have Facebook groups for internal announcements. Ask [Johnny](https://nodes.slack.com/messages/@joso) to add you to the groups.
+- Ask where the coffee machine is
 
 
 # Tools We Use
@@ -145,7 +156,7 @@ Depending if you are in London, Copenhagen or Aarhus you will have other meeting
 [**NStack**](https://nstack.io/) is a service we built and it is the tool we use for doing localisation. Together with the [**NStack SDK**](https://github.com/nodes-android/NStack) it offers dynamic localisation for our apps and other usefull functionalities. If you go to [nstack.io](https://nstack.io/) and select your project and translate, you will be able to add new sections with new Translations. These translations can be changed in NStack and the changes will reflect in the app without the need of an app update.
 
 # Coding Guidelines
-Make sure to read our [**Android Style Guide**](styleguide.md).  
+Make sure to read our [**Android Style Guide**](https://github.com/nodes-android/guidelines/blob/master/styleguide.md).  
 
 
 # Nodes CI
@@ -153,6 +164,7 @@ Our CI system is now hosted by Bitrise. We have several tools and scripts used f
 
  - [Gradle build plugin](https://github.com/nodes-android/ci-bitrise-gradle-plugin)
  - [Deploy bitrise step (ruby)](https://github.com/nodes-android/ci-bitrise-deploy-step)
+ - [Changelog step (gathering commit messages for a changelog)](https://github.com/nodes-android/ci-bitrise-changelog-step)
  
  We have a [guide for setting up the CI](https://github.com/nodes-android/guidelines/blob/master/Bitrise.md)
 
@@ -162,7 +174,7 @@ Having one office in London, one in Copenhagen and one in Aarhus means you might
 
 It helps a lot if you try to foresee any problems you might run into and let the PM know. This is to avoid the situation where you need an answer from someone in order to continue with your work. It is fine to take the lead and tackle design problems for example. Just make sure to let your PM know about the problem and the solution since the PM's must be always kept in the loop.
 
-Estimate sprints before starting any ticket, if before starting a ticket you feel that the estimate has changed re-estimate and let your PM know. Try to harvest per ticket copy-pasting the link of the ticket you are working on so the PM can have a clear overview of how the time is being used.
+Estimate sprints before starting any ticket. If before starting a ticket you feel that the estimate has changed, re-estimate and let your PM know. Try to harvest per ticket copy-pasting the link of the ticket you are working on so the PM can have a clear overview of how the time is being used.
 
 If you need something (an image asset, some input from the PM, etc), make a Trello card asking for it. If it is urgent you can ping them on Slack.
 
