@@ -34,7 +34,6 @@ On the bigger enterprise projects, most of the clean arch patterns help provide 
 
 Check out our blog for a quick run through of our [internal stack](https://engineering.nodesagency.com/our-stacks/android/)
 
-### Commonly used open source libraries developed by Nodes
 [**NStack SDK**](https://github.com/nodes-android/NStack) Offers dynamic localisation for our apps and other useful functionalities. If you go to [nstack.io](https://nstack.io/) and select your project and translate, you will be able to add new sections with new Translations. These translations can be changed in NStack and the changes will reflect in the app without the need of an app update.
 
 [**okhttputils**](https://github.com/nodes-android/okhttputils) Collection of often used utilities for okhttp or related to communicating with a backend over HTTP. This contain logging interceptors for error logging as well as a generic error handler and retrofit helpers.
