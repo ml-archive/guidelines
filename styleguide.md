@@ -1,6 +1,7 @@
 # Android style guide
 
  - [Package structure](#package-structure)
+ - [Naming](#naming)
  - [Constants](#constants)
  - [Injection](#injection)
  - [Unit testing](#unit-testing)
@@ -11,9 +12,11 @@
 
 ## Package structure [](#){name=packagestructure}
 
+*Note all lower case package names*
+
  - dk.company.appname
     - base
-    - common
+    - domain
         - api
         - injection
         - models
@@ -31,6 +34,21 @@
         - main
              - MainActivity.java
         - App.java
+
+## Naming
+
+### XML
+
+After Kotlin introduced the extensions that autogenerates view bindings, naming conventions of xml elements is even more important.
+
+The format is _layout_ _name_ _viewtype_ ~ `loginPasswordEt` or put another way, think of it as nstack with section-Key-ViewType
+
+### Classes
+
+ - Repositories can either be named `SomethingRepo` or `SomethingRepository`
+ - Interactors are in the format `SomethingInteractor`
+ - Activities/Fragments are named `SomethingFragment` / `SomethingActivity`
+ - Views/Layouts are `SomethingView` / `SomethingLayout`
 
 ## Constants [](#){name=constants}
 
