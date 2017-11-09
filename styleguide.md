@@ -3,14 +3,11 @@
  - [Package structure](#package-structure)
  - [Naming](#naming)
  - [Constants](#constants)
- - [Injection](#injection)
- - [Unit testing](#unit-testing)
- - [Repositories](#repositories)
- - [Interactors](#interactors)
- - [Caching](#caching)
+ - [If statements](#if-statements)
  - [Error handling](#error-handling)
+ - [Kotlin](#kotlin)
 
-## Package structure [](#){name=packagestructure}
+## Package structure
 
 *Note all lower case package names*
 
@@ -19,6 +16,12 @@
     - domain
         - api
         - injection
+        - interactors
+            - login
+              - LoginInteractor.java
+              - LogoutInteractor.java
+            - splash
+              - InitSplashInteractor.java
         - models
         - translation
             - Translation.java
@@ -39,9 +42,21 @@
 
 ### XML
 
+*View Ids*
+
 After Kotlin introduced the extensions that autogenerates view bindings, naming conventions of xml elements is even more important.
 
 The format is _layout_ _name_ _viewtype_ ~ `loginPasswordEt` or put another way, think of it as nstack with section-Key-ViewType
+
+**File names**
+
+- list_item_name *Adapter views for listviews/recyclerviews*
+ - fragment_name *Fragment views*
+ - include_name  *Include layouts, try to add some context here as well i.e. include_main_toolbar or include_list_item_something_header*
+ - activity_name  *Activity views*
+ - dialog_name *Dialogs*
+
+
 
 ### Classes
 
@@ -50,7 +65,7 @@ The format is _layout_ _name_ _viewtype_ ~ `loginPasswordEt` or put another way,
  - Activities/Fragments are named `SomethingFragment` / `SomethingActivity`
  - Views/Layouts are `SomethingView` / `SomethingLayout`
 
-## Constants [](#){name=constants}
+## Constants
 
 ### Environment keys/constants
 
@@ -89,19 +104,62 @@ public class IntentKeys {
 
 ```
 
-## Injection 
+# If statements
 
-### Contructor injection
+**Minimize logic in ifs**
 
-### Injecting the presenters
+Try to boil down `if` statements. If you have many expressions, consider changing them to boolean local variables:
 
-## Unit testing 
+```java
+// Hard to read
+if(repo.get(id).getAge() < repo.get(otherId).getAge() && otherRepo.getItems().contains(id) && SomethingManager.getSomeState() == SomeState.X) {
+    ...
+}
 
-## Repositories 
+// Better
+boolean isYounger = repo.get(id).getAge() < repo.get(otherId).getAge();
+boolean existsInList = otherRepo.getItems().contains(id);
+boolean isStateX = SomethingManager.getSomeState() == SomeState.X;
+if(isYounger && existsInList && isStateX) {
+    ...
+}
+```
 
-## Interactors 
+**Avoid nested ifs**
 
-## Caching 
+Following logic in a deeply nested if else mess can be hard and error prone for the next developer. There are several ways of avoiding that.
 
-## Error handling 
+Consider inverting the expression and returning:
+```java
+// Hard to follow
+if (item != null) {
+   if (item.getFollowers() != null && item.getFollowers().get(someId) != null) {
+       follower = item.getFollowers().get(someId);
+   }
+}
 
+// Better
+if(item == null) {
+    return;
+}
+
+if(item.getFollowers() == null || !item.getFollowers().contains(someId)) {
+    return;
+}
+
+follower = item.getFollowers().get(someId);
+```
+
+# Error handling
+
+## Api responses
+
+## Try catch
+
+# Kotlin
+
+## When
+
+## Let 
+
+## Apply
