@@ -76,23 +76,20 @@ shrinkResources gets rid of the reference to unused resources.
 
 If you find any issues with proguard in any project regarding a specific library just check on that library website for up to date proguard rules and just update the file. **Please also update the file in the template project**
 
-## Upload checklist
+## New build checklist
 
- - Analytics is tracking. Verify on Google Analytics website
- - Hockey is correctly added (Tracking crash reports, version alerts should be disabled by the Debug flag)
- - Install on top of old cached app if it is an update to check its behaviour (QA should already have checked this)
+ - AMT/QA verifies most, but do them a favor and check that Google Maps/UA etc is working when making a build after changing stuff.
+ - Check that Hockey keys are correctly setup to each flavor in `build.gradle`
+ - Make release notes with relevant commit messages/trello tickets
  - Confirm version number with PM
- - Check that you are referring to the LIVE version of the Facebook App, not the DEV version.
- - Does the app handle missing internet connection properly?
- - Does the app handle a slow internet connection properly?
- - Double check views are not clipping on small phones. (Add scrollviews or use weights where needed)
- - Check Map views with release key
- - Make sure all social-media keys are correct(SHA-1 ect)
- - App version name / code correctly set (http://semver.org/)
- - Check for libraries included multiple times
  - Check production build of app for any proguard errors
- - Make sure you run the APK you ship at least once.
- - Upload keystore file to Google drive / Include password (https://drive.google.com/open?id=0B09IfosUwe8iSXVxUWR6am9wSmc) 
+ 
+## When going live
+ 
+ - Merge all PR's and merge develop <-> master, all that git flow jazz
+ - Upload keystore file to Google drive / Include password in Public -> Dev -> Android -> Keystores.
+ - Make sure you run the APK you ship at least once. 
+ - When doing major releases, test out your new build on top of the current live build. There can be data migration issues, is user data persisted etc etc.
  
  
 # Team meetings
