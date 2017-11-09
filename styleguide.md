@@ -1,6 +1,7 @@
 # Android style guide
 
  - [Package structure](#package-structure)
+ - [Syntax](#syntax)
  - [Naming](#naming)
  - [Constants](#constants)
  - [If statements](#if-statements)
@@ -37,6 +38,124 @@
         - main
              - MainActivity.java
         - App.java
+
+## Class structure
+
+### Fields
+
+ - Order your fields and group them together and have all the fields at the top of the class.
+ - Try to have some logic around the order of your methods. Group relevant stuff together, avoid having random view util methods in the middle of a MVP view interface.
+
+**Do**
+
+```java
+class SomethingFragment implements SomethingMvpView {
+    
+    @BindView(R.id.id)
+    TextView nameTv;
+    
+    @BindView(R.id.id)
+    TextView passwordEt;
+    
+    @Inject
+    LoginPresenter presenter;
+    
+    private boolean someFlag;
+    private boolean otherFlag;
+    
+    void onCreate(...) {
+    ...
+    }
+    
+    void someMethod() {
+    ...
+    }
+    
+    @Override
+    void showLoading() {
+    ...
+    }
+    
+    @Override
+    void showContent() {
+    ...
+    }
+}
+```
+
+**Don't**
+```java
+class SomethingFragment {
+    
+    @BindView(R.id.id)
+    TextView nameTv;
+    
+    @Inject
+    LoginPresenter presenter;
+    
+    private boolean someFlag;
+    
+    @BindView(R.id.id)
+    TextView passwordEt;
+    
+    void onCreate(...) {
+    ...
+    }
+    
+    @Override
+    void showContent() {
+    ...
+    }
+    
+    private boolean otherFlag;
+   
+    void someMethod() {
+    ...
+    }
+    
+    @Override
+    void showContent() {
+    ...
+    }
+}
+```
+
+## Syntax
+
+### Paranthesis & Brackets
+
+```java
+// Always use brackets
+if (something) {
+    return;
+}
+
+// Not allowed
+if (something) return;
+
+// Not allowed
+if (something)
+    return;
+```
+
+### Comments
+
+**Don't**
+```java
+//something imporant
+
+/*somthing important*/
+```
+
+**Do**
+```java
+// Something important
+
+/*
+Something important
+*/
+```
+
 
 ## Naming
 
