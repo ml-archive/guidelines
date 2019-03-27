@@ -1,5 +1,14 @@
 # Bitrise Setup
 
+## Make apps on HockeyApp
+
+1) Manually make an app per environment (New App -> "Create the app manually instead.")
+2) Set Platform to Android, release type to beta
+3) Title format should be: App name - Environment, so i.e. Careem NOW - Production
+4) Account should be set to Nodes
+5) Bundle identifier should be com.client.appname.development / com.client.appname.staging / com.client.appname
+6) After creating the app, go to "Manage App" -> Distribution -> Download Page - Public [x]
+
 ## Make an app on Bitrise
 If you haven't been invited to bitrise.io, please contact your tech lead or manager.
 
