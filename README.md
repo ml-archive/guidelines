@@ -1,132 +1,70 @@
-# Playbook
+# How we work
 
-### Package naming
+## Kotlin
+All new projects in Nodes are developed in Kotlin and use coroutines extensively. As many others we are constantly embracing the new features in Kotlin and using them as fast as we can.
 
-com._clientname_._appname_ /
-dk._clientname_._appname_
+## Template project
+Given our project churn in Nodes, it's important to have a good start to a project, so we created a template with our stack already set up + CI ready Gradle configurations.
 
-### Keystore
+Our [newest template](https://github.com/nodes-android/kotlin-template) is built on a MVVM/clean architecture/multi module approach following the current trends and best practices. Before MVVM we used a MVP base depending on an [arch library](https://github.com/nodes-android/nodes-architecture-android) shaping how we use interactors and presenters. The arch library is still being maintained and supported.
 
- 1. Create a keystore in AS with an alias name.
- 2. Upload/Find keystores to Google Drive here: https://drive.google.com/open?id=0B09IfosUwe8iSXVxUWR6am9wSmc 
- 3. Create a doc with the passwords/aliases
+## Patterns
+### MVVM
+Our newest template for client projects use [Google's ViewModels](https://developer.android.com/topic/libraries/architecture/viewmodel) with a lightweight ViewState approach, similar to MVI.
 
-### NStack setup
-See [NSTACK](https://github.com/nodes-android/nstack)
+We believe this is a much needed "standardization" of the current Android development practices that will help onboarding of new developers, but also handover to clients and general collaboration.
 
-We have a rewritten smaller version of nstack in Kotlin [https://github.com/nodes-android/kstack](https://github.com/nodes-android/kstack). Going forward this is the version of nstack we'll improve and work on.
+### MVP
+Before the switch to MVVM we used a MVP template depending on extending base presenters from our arch library. 
 
-### Patterns
-#### MVP
-Way of structuring business logic, data storage and presentation (UI) in a way that makes a lot of sense on larger projects. It is mandatory.
+**Presenters**:
+Our presenters attach to the view's lifecycle so detachment and clean up is automatically handled - similar to the many others MVP solutions out there.
 
-It is important to understand how repositories work and what is their role in a project. Failing to understand this will end up with huge presenters taking all of the burden.
+Since the switch to Kotlin, our presenters also expose Coroutine scopes and helper extension methods to ease the verbosity of Dispatchers/Contexts.
 
-Interactors are a plus, should be considered on large projects.
+**View**:
+We use a standard "Contract" approach with interfaces for the Presenter and View in the same class.
 
-#### Clean architecture
-On the bigger enterprise projects, most of the clean arch patterns help provide modularity and provide a better base for unit testing.
+### Clean architecture
  - Interactors are a must for small isolated pieces of work. Have them do one task only and test that.
  - Every model should have a Repository for CRUD'ing over disk/network
  - Keep Presenters as small as possible and try to make then be the connection between interactors and the view.
  - Use Dagger to maintain your object instantiation in a central place. This becomes even more important in larger projects.
 
-### Stack
+### Dependency Injection
+
+Both our MVP and our MVVM template projects use [Dagger 2](https://github.com/google/dagger) as the dependency injection tool. 
+
+## Stack
 
 Check out our blog for a quick run through of our [internal stack](https://engineering.nodesagency.com/our-stacks/android/)
 
 [**NStack SDK**](https://github.com/nodes-android/NStack) Offers dynamic localisation for our apps and other useful functionalities. If you go to [nstack.io](https://nstack.io/) and select your project and translate, you will be able to add new sections with new Translations. These translations can be changed in NStack and the changes will reflect in the app without the need of an app update.
 
-[**okhttputils**](https://github.com/nodes-android/okhttputils) Collection of often used utilities for okhttp or related to communicating with a backend over HTTP. This contain logging interceptors for error logging as well as a generic error handler and retrofit helpers.
+[**Filepicker**](https://github.com/nodes-android/filepicker) As the title goes it is a library for picking a file and getting a URI back. Also deals with special and very complicated case of obtaining and image from the camera on Android.
 
-[**filepicker**](https://github.com/nodes-android/filepicker) As the title goes it is a library for picking a file and getting a URI back. Also deals with special and very complicated case of obtaining and image from the camera on Android.
-Does not yet support SAF, but its in the pipeline.
+[**Locksmith**](https://github.com/nodes-android/locksmith) Handling fingerprint/encryption can be verbose and complex, so we made a wrapper around handling it.
 
-[**nutils**](https://github.com/nodes-android/nutils) nutils contains often used smaller pieces of code which can't be anywhere else.
+[**Form validation**](https://github.com/nodes-android/form-validator) Making validation in login/signup etc forms can be annoying and time consuming, so we tried making it easier and faster to develop.
 
-[**gutenberg**](https://github.com/nodes-android/gutenberg) Our font loading and setting library. If your app uses custom fonts, you need this.
 
-### Commonly used thirdparty libs
-#### New Relic
+## Commonly used thirdparty libs
+### Retrofit/OkHttp
+We use Retrofit for API communication (surprise)
+
+### Glide
+For image loading we usually use Glide over Picasso, since their defaults are usually less heavy in memory usage and the context lifecycle to bitmap cache freeing is also good.
+
+### Firebase
+In general we always use Firebase for analytics and crash reporting. Sometimes we add Remote Config or in rare cases their serverless database offerings.
+
+### New Relic
 This piece of software uses an brand of reflection to look at your apps HTTP communication, intercepting errors and uploading them to a cloud interface. This should be added when we're dealing with an externally developed API.
 
-ProTip: Use BuildConfig.DEBUG to turn it off on debug builds because its debug output is infuriatingly annoying and it stack traces all over the place.
-
-#### HockeyApp integration
-We always integrate hockey. Remember to differentiate your initialization based on the BuildConfig.DEBUG flag. In debug mode you want the crash submission dialog as well as the update check. On release builds on the other hand you want silently uploaded (sneaky) crash reports and no update checking. 
-
-### Proguard integration
-We use proguard in our release builds to get rid of unused code and obfuscate code. There's a proguard template for the most common libraries we use on the Nodes Template project (https://github.com/nodes-projects/template-project-android).
-
-There is a proguard folder in the root of the project **(make sure you update .gitignore if adding this setup to an existing project as this folder was being ignored in previous versions)** that contains a rules file for each of the libraries we use. Just delete the ones you don't need.
-
-In the gradle file we need this setup:
-~~~gradle
-buildTypes {
-      release {
-          minifyEnabled true
-          shrinkResources true
-          proguardFiles getDefaultProguardFile('proguard-android.txt')
-          proguardFiles fileTree('proguard').asList().toArray()
-      }
-  }
-~~~
-
-shrinkResources gets rid of the reference to unused resources.
-
-If you find any issues with proguard in any project regarding a specific library just check on that library website for up to date proguard rules and just update the file. **Please also update the file in the template project**
-
-## New build checklist
-
- - AMT/QA verifies most, but do them a favor and check that Google Maps/UA etc is working when making a build after changing stuff.
- - Check that Hockey keys are correctly setup to each flavor in `build.gradle`
- - Make release notes with relevant commit messages/trello tickets
- - Confirm version number with PM
- - Check production build of app for any proguard errors
- 
-## When going live
- 
- - Merge all PR's and merge develop <-> master, all that git flow jazz
- - Upload keystore file to Google drive / Include password in Public -> Dev -> Android -> Keystores.
- - Make sure you run the APK you ship at least once. 
- - When doing major releases, test out your new build on top of the current live build. There can be data migration issues, is user data persisted etc etc.
- 
- 
-# Team meetings
-Here are the recurring meetings the Android team takes part in:
-
-#### Android Team Meeting
-This is the main meeting in the Android team, where we talk about the latest things happening in our team. General direction of the team, brief general team performance review, what people need help with, amount of workload, should we use or not _that_ framework, etc. It happens every month.
-
-#### Production meetings
-
-The production meetings is a bi-monthly meeting where all our developers and QA take part. Each meeting, another team has the agenda, and they talk about something relevant to their domain, but which can affect all of us. We try to maximize the knowledge sharing so we can all become better together. 
-
-#### Quarterly Company Catch-up
-
-This is a quarterly meeting, where the board tells all the employees how the company did in the last quarter and what our targets and short, mid and long-term plans are. You'll find out if the sales and production are on track, below or ahead of target, and anything else relevant to the company. It's not only a presentation, feel free to ask questions. 
-
-#### Ask for other Meetings
-Depending if you are in London, Copenhagen or Aarhus you will have other meetings. Make sure you are updated on the different ones that haven;t been included here.
-
-
-# Your First Day
-- Start by installing Android Studio and the different tools that we use, see Tools we use
-- Ask [Johnny](https://nodes.slack.com/messages/@joso) to invite you to [our private git](https://github.com/nodes-projects/). He will add you to the correct groups. Here is where we have our client projects.
-- Ask [Johnny](https://nodes.slack.com/messages/@joso) to invite you to [our GitHub organisation](https://github.com/nodes-android) so you can contribute to build great open source libraries. 
-- Ask [Johnny](https://nodes.slack.com/messages/@joso) to invite you to Hockey
-- Ask [Casper](https://nodes.slack.com/messages/@cr) for access to Postman
-- Have a project manager add you to our Trello organisation
-- Ask [Jonas](https://nodes.slack.com/messages/@josc) to add you to Slack and Ask [Johnny](https://nodes.slack.com/messages/@joso) to add you to the correct channels.
-- Make sure you read the [Nodes Handbook](https://docs.google.com/document/d/1E4ZyGqIKDttGlJ0c0rEkNy2lxP-n1PBwQzuaESbLnpw/edit) (private document). 
-- We have Facebook groups for internal announcements. Ask [Johnny](https://nodes.slack.com/messages/@joso) to add you to the groups.
-- Ask where the coffee machine is
-
-
 # Tools We Use
-[**Slack**](https://nodes.slack.com) Is our main communication tool. We use this for daily communication. You can message any Nodes user directly or you can join group chats called channels.
+[**Slack**](https://nodes.slack.com) is our main communication tool. 
 
-[**Trello**](https://trello.com) Is our main project management tool.  Each project has its own Trello board. Make sure Trello is updated when starting and finishing tasks. This will help the whole team to have a better overview of the project. Ask your project manager if you have questions.
+[**Jira**](https://www.atlassian.com/software/jira) is our project management tool. [**Trello**](https://www.trello.com) is also used for some internal projects and older projects not yet migrated to Jira.
 
 [**Harvest**](https://nodes.harvestapp.com/) is the time tracking tool that we use. Make sure to always harvest on the appropriate project. Ask the PM on which Harvest project you should track the time.
 
@@ -136,7 +74,9 @@ Depending if you are in London, Copenhagen or Aarhus you will have other meeting
 
 [**Zeplin**](https://zeplin.io/) Is the tool we use to check the Android designs of each of our projects. In Zeplin, you can see each screen in the design, get info about the sizes, margins, paddings, fonts, colours and also export assets for our app. Try to use SVG's if possible and feel free to have multiples of 8 to follow the Android design guidelines.
 
-[**Hockey**](https://www.hockeyapp.net/) Is our tool for in-house distribution and crash reporting.
+[**Hockey**](https://www.hockeyapp.net/) Is our tool for in-house distribution.
+
+[**Firebase Crashlytics**](https://firebase.google.com/docs/crashlytics) is the current crash reporting platform. We used to use Hockey for that.
 
 [**NStack**](https://nstack.io/) is a service we built and it is the tool we use for doing localisation. Together with the [**NStack SDK**](https://github.com/nodes-android/NStack) it offers dynamic localisation for our apps and other usefull functionalities. If you go to [nstack.io](https://nstack.io/) and select your project and translate, you will be able to add new sections with new Translations. These translations can be changed in NStack and the changes will reflect in the app without the need of an app update.
 
@@ -144,7 +84,7 @@ Depending if you are in London, Copenhagen or Aarhus you will have other meeting
 Make sure to read our [**Android Style Guide**](https://github.com/nodes-android/guidelines/blob/master/styleguide.md).  
 
 
-# Nodes CI
+# CI
 Our CI system is now hosted by Bitrise. We have several tools and scripts used for building and deploying.
 
  - [Gradle build plugin](https://github.com/nodes-android/ci-bitrise-gradle-plugin)
@@ -155,7 +95,7 @@ Our CI system is now hosted by Bitrise. We have several tools and scripts used f
 
 
 # Working at Nodes
-Having one office in London, one in Copenhagen and one in Aarhus means you might get to work with colleagues who are not in the same office as you are. If that is the case, make sure to rely as much as possible on Trello and the project's channel on Slack.
+Having offices in many different timezones, from London to Dubai, means you might get to work with colleagues who are not in the same office as you are. If that is the case, make sure to rely as much as possible on Jira/Trello and the project's channel on Slack.
 
 It helps a lot if you try to foresee any problems you might run into and let the PM know. This is to avoid the situation where you need an answer from someone in order to continue with your work. It is fine to take the lead and tackle design problems for example. Just make sure to let your PM know about the problem and the solution since the PM's must be always kept in the loop.
 
