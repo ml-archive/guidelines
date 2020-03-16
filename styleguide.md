@@ -251,19 +251,44 @@ Retrofit retrofit = Retrofit.Builder()
 
 #### Constants that doesn't change
 
-*Don't*: Use one giant `Constants.kt`
+<table width="100%">
+<tr>
+    <th>Do</th>
+    <th>Don't</th>
+  </tr>
+<tr>
+<td>
 
-*Do*:
 ```kotlin
-object IntentKeys {
+object ArgumentKeys {
   const val LOGIN_USER = "LOGIN_USER"
-    ...
+}
+object DefaultValues {
+  const val ITEM_CNT = 30
 }
 
 ```
 
+</td>
+<td>
 
-# Null Safety
+Use one giant `Constants.kt`
+```kotlin
+ object Constants {
+   const val DEFAULT_ITEM_CNT = 30
+   const val ARG_ITEM_ID = "itemId"
+   ...
+ }
+```
+
+</td>
+</tr>
+
+</table>
+
+
+
+## Null Safety
 
 
 # If statements
