@@ -310,7 +310,30 @@ Use one giant `Constants.kt`
 
 
 
-## Null Safety
+## Scope functions
+Kotlin provides various scope functions that allows to  execute a block of code within the context of an object. To help you choose the right scope function for your purpose, you can use this table that highlights differences between them.
+
+
+
+| Function 	| Object Reference 	| Return Value   	| Is extension function                       	|
+|:--------:	|:----------------:	|----------------	|---------------------------------------------	|
+| `let`      	| it               	| Lambda result  	| Yes                                         	|
+| `run`      	| this             	| Lambda result  	| Yes                                         	|
+| `run`      	| -                	| Lambda result  	| No: called without the context object       	|
+| `with`     	| this             	| Lambda result  	| No: takes the context object as an argument 	|
+| `apply`    	| this             	| Context object 	| Yes                                         	|
+| `also`     	| it               	| Context object 	| Yes                                         	|
+
+
+Here is a short guide for choosing scope functions depending on the intended purpose:
+
+- Executing a lambda on non-null objects: `let`
+- Introducing an expression as a variable in local scope: `let`
+- Object configuration: `apply`
+- Object configuration and computing the result: `run`
+- Running statements where an expression is required: **non-extension** `run`
+- Additional effects: `also`
+- Grouping function calls on an object: `with`
 
 
 # If statements
