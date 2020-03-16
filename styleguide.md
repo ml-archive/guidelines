@@ -48,11 +48,13 @@ Presentation module contains all ui-related logic: Fragments, ViewModels, Custom
         - login
             - LoginFragment.kt
             - LoginViewModel.kt
-            - LoginViewState.java
+            - LoginViewState.kt
         - signup
         - splash
         - main
-             - MainActivity.java
+             - MainActivity.kt
+             - MainViewModel.kt
+             - MainViewState.kt
     - util
 
 
@@ -72,124 +74,126 @@ Domain module contains Repository interfaces, Interactors and Entities that used
       - Post.kt
 
 ### Data Module Package Structure
+Data module contains repository implementations and local/remote data sources
+- dk.company.appname.data
+  - repository
+    - UserRepositoryImpl.kt
+    - PostsRepositoryImpl.kt
+  - database
+  - network
 
-
-## Class structure
+## Activity/Fragment Class structure
 
 ### Fields
 
  - Order your fields and group them together and have all the fields at the top of the class.
- - Try to have some logic around the order of your methods. Group relevant stuff together, avoid having random view util methods in the middle of a MVP view interface.
+ - Try to have some logic around the order of your methods
+ - When subscribing for a  `LiveData`'s state try splitting rendering of these properties into separate functions
 
-**Do**
 
-```java
-class SomethingFragment implements SomethingMvpView {
-
-    @BindView(R.id.id)
-    TextView nameTv;
-
-    @BindView(R.id.id)
-    TextView passwordEt;
-
-    @Inject
-    LoginPresenter presenter;
-
-    private boolean someFlag;
-    private boolean otherFlag;
-
-    void onCreate(...) {
-    ...
-    }
-
-    void someMethod() {
-    ...
-    }
-
-    @Override
-    void showLoading() {
-    ...
-    }
-
-    @Override
-    void showContent() {
-    ...
-    }
-}
-```
-
-**Don't**
-```java
+```kotlin
 class SomethingFragment {
 
-    @BindView(R.id.id)
-    TextView nameTv;
+  private val viewModel: SomethingViewModel by viewModel()
+  private val args: SomethingFragmentArgs by navArgs()
 
-    @Inject
-    LoginPresenter presenter;
+  override fun onActivityCreated(savedInstanceState: Bundle?) {
+    viewModel.viewState.observeNonNull(this) { state ->
+         showLoading(state)
+         showPosts(state)
+         showErrorMessage(state)
+     }
+ }
 
-    private boolean someFlag;
+ private fun showPosts(state: SampleViewState) {
+   // Show Posts
+ }
 
-    @BindView(R.id.id)
-    TextView passwordEt;
+ private fun showLoading(state: SampleViewState) {
+   // Show Loading state}
 
-    void onCreate(...) {
-    ...
-    }
-
-    @Override
-    void showContent() {
-    ...
-    }
-
-    private boolean otherFlag;
-
-    void someMethod() {
-    ...
-    }
-
-    @Override
-    void showContent() {
-    ...
-    }
+ private fun showErrorMessage(state: SampleViewState) {
+    // Handle error dialog
+  }
 }
 ```
 
 ## Syntax
 
 ### Paranthesis & Brackets
+The curly braces around a body can be omitted if the body is a oneliner. This is discouraged unless the body goes on the same line as the condition
 
-```java
-// Always use brackets
+
+
+<table width="100%">
+<tr>
+    <th>Do</th>
+    <th>Don't</th>
+  </tr>
+<tr>
+<td>
+
+```kotlin
+// OK
+if (something) doSomething()
+```
+
+```kotlin
+// OK
 if (something) {
-    return;
+  doSomething()
 }
+```
 
-// Not allowed
-if (something) return;
 
+</td>
+<td>
+
+```kotlin
 // Not allowed
 if (something)
-    return;
+  doSomething()
 ```
+
+
+</td>
+</tr>
+</table>
+
 
 ### Comments
 
-**Don't**
-```java
-//something imporant
 
-/*somthing important*/
-```
+<table width="100%">
+<tr>
+    <th>Do</th>
+    <th>Don't</th>
+  </tr>
+<tr>
+<td>
 
-**Do**
-```java
+```kt
 // Something important
 
 /*
 Something important
 */
 ```
+
+
+</td>
+<td>
+
+```kotlin
+//something imporant
+
+/*somthing important*/
+```
+
+
+</td>
+</tr>
+</table>
 
 
 ## Naming
@@ -235,85 +239,159 @@ buildConfigField "int", "SOME_ENV_SPECIFIC_ID", "1"
 buildConfigField "boolean", "API_ENV_VAR", "false"
 ```
 
-```Java
-Retrofit retrofit = new Retrofit.Builder()
+```kotlin
+Retrofit retrofit = Retrofit.Builder()
     .baseUrl(BuildConfig.API_URL)
     ...
     .client(client)
-    .build();
+    .build()
 
-    return retrofit.create(BackendService.class);
+    return retrofit.create(BackendService.class)
 ```
 
 #### Constants that doesn't change
 
-*Don't*: Use one giant `Constants.java`
+*Don't*: Use one giant `Constants.kt`
 
 *Do*:
-```java
-public class IntentKeys {
-    public static final String LOGIN_USER = "LOGIN_USER";
+```kotlin
+object IntentKeys {
+  const val LOGIN_USER = "LOGIN_USER"
     ...
 }
 
 ```
 
+
+# Null Safety
+
+
 # If statements
 
-**Minimize logic in ifs**
+### Minimize logic in ifs
 
 Try to boil down `if` statements. If you have many expressions, consider changing them to boolean local variables:
 
-```java
-// Hard to read
-if(repo.get(id).getAge() < repo.get(otherId).getAge() && otherRepo.getItems().contains(id) && SomethingManager.getSomeState() == SomeState.X) {
-    ...
-}
+<table width="100%">
+<tr>
+    <th>Do</th>
+    <th>Don't</th>
+  </tr>
+<tr>
+<td>
 
+```kotlin
 // Better
-boolean isYounger = repo.get(id).getAge() < repo.get(otherId).getAge();
-boolean existsInList = otherRepo.getItems().contains(id);
-boolean isStateX = SomethingManager.getSomeState() == SomeState.X;
+val isYounger = repo.get(id).getAge() < repo.get(otherId).getAge()
+val existsInList = otherRepo.getItems().contains(id)
+val isStateX = SomethingManager.getSomeState() == SomeState.X
+
 if(isYounger && existsInList && isStateX) {
     ...
 }
 ```
 
-**Avoid nested ifs**
+</td>
+<td>
+
+```kotlin
+// Hard to read
+if(repo.get(id).getAge() < repo.get(otherId).getAge()
+ && otherRepo.getItems().contains(id)
+ && SomethingManager.getSomeState() == SomeState.X) {
+    ...
+}
+```
+
+</td>
+</tr>
+
+</table>
+
+
+## if vs. when
+
+Use `if` for binary checks. When there are more then two options consider using `when` instead
+
+<table width="100%">
+<tr>
+    <th>Do</th>
+    <th>Don't</th>
+  </tr>
+<tr>
+<td>
+
+  ```kotlin
+  if(condtion) {
+    doSomething()
+  } else {
+    doSomethingElse()
+  }
+  ```
+
+</td>
+<td>
+
+  ```kotlin
+  when(condtion) {
+    true -> doSomething()
+    false -> doSomethingElse()
+  }
+  ```
+
+</td>
+</tr>
+<tr>
+<td>
+
+```kotlin
+when (size) {
+  1 -> doSomething()
+  in 1..10 -> doIfConditionB()
+  else -> doSomethingElse()
+}
+```
+
+</td>
+<td>
+
+
+
+  ```kotlin
+  if (size == 1) {
+    doSomething()
+  } else if (size <= 10 && size > 1) {
+     doIfConditionB()
+  } else {
+    doSomethingElse()
+  }
+  ```
+
+</td>
+</tr>
+</table>
+
+### Avoid nested ifs
 
 Following logic in a deeply nested if else mess can be hard and error prone for the next developer. There are several ways of avoiding that.
 
 Consider inverting the expression and returning:
-```java
+```kotlin
 // Hard to follow
 if (item != null) {
    if (item.getFollowers() != null && item.getFollowers().get(someId) != null) {
-       follower = item.getFollowers().get(someId);
+       follower = item.getFollowers().get(someId)
    }
 }
 
 // Better
 if(item == null) {
-    return;
+    return
 }
 
 if(item.getFollowers() == null || !item.getFollowers().contains(someId)) {
-    return;
+    return
 }
 
-follower = item.getFollowers().get(someId);
+follower = item.getFollowers().get(someId)
 ```
-
-# Error handling
-
-## Api responses
-
-## Try catch
-
-# Kotlin
-
-## When
-
-## Let
-
-## Apply
