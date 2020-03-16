@@ -8,36 +8,71 @@
  - [Error handling](#error-handling)
  - [Kotlin](#kotlin)
 
-## Package structure
 
-*Note all lower case package names*
+## Modules And Packages Structure
 
- - dk.company.appname
+
+Following clean architecture guidelines our projects are split into three separate modules: Domain, Data, Presentation and App
+> Note all packages are in lower case
+
+
+### App module package structure
+App module is the main application module. It must contain only your `Application` class and `Dagger` files to provide dependencies injection for the whole application
+
+- dk.company.appname.app
+  - initlizers
+    - AppInitlizer.kt
+  - injection
+    - components
+    - modules
+      - AppModule.kt
+      - InteractorModule.kt
+      - RestModule.kt
+      - RepositoryModule.kt
+  - App.kt
+
+
+### Presentation module package structure
+Presentation module contains all ui-related logic: Fragments, ViewModels, Custom views and etc.
+ - dk.company.appname.presentations
     - base
-    - domain
-        - api
-        - injection
-        - interactors
-            - login
-              - LoginInteractor.java
-              - LogoutInteractor.java
-            - splash
-              - InitSplashInteractor.java
-        - models
-        - translation
-            - Translation.java
+    - nstack
+      - Translation.java
+      - RateReminderActions.kt
+    - extensions
+      - ContextExtensions.kt
+      - ViewExtensions.kt
     - ui
         - shared
-            - LogoutDialog.java
+            - AppDialog.kt
         - login
-            - LoginFragment.java
-            - LoginMvpView.java  <- Or LoginContract.java?
-            - LoginPresenter.java
+            - LoginFragment.kt
+            - LoginViewModel.kt
+            - LoginViewState.java
         - signup
         - splash
         - main
              - MainActivity.java
-        - App.java
+    - util
+
+
+### Domain Module Package Structure
+Domain module contains Repository interfaces, Interactors and Entities that used by them
+- dk.company.appname.domain
+    - extensions
+    - managers
+    - repository
+      - UserRepository.kt
+      - PostsRepository.kt
+    - interactors
+      - Interactor.kt
+      - GetPostsInteractor.kt
+    - models
+      - User.kt
+      - Post.kt
+
+### Data Module Package Structure
+
 
 ## Class structure
 
@@ -50,32 +85,32 @@
 
 ```java
 class SomethingFragment implements SomethingMvpView {
-    
+
     @BindView(R.id.id)
     TextView nameTv;
-    
+
     @BindView(R.id.id)
     TextView passwordEt;
-    
+
     @Inject
     LoginPresenter presenter;
-    
+
     private boolean someFlag;
     private boolean otherFlag;
-    
+
     void onCreate(...) {
     ...
     }
-    
+
     void someMethod() {
     ...
     }
-    
+
     @Override
     void showLoading() {
     ...
     }
-    
+
     @Override
     void showContent() {
     ...
@@ -86,33 +121,33 @@ class SomethingFragment implements SomethingMvpView {
 **Don't**
 ```java
 class SomethingFragment {
-    
+
     @BindView(R.id.id)
     TextView nameTv;
-    
+
     @Inject
     LoginPresenter presenter;
-    
+
     private boolean someFlag;
-    
+
     @BindView(R.id.id)
     TextView passwordEt;
-    
+
     void onCreate(...) {
     ...
     }
-    
+
     @Override
     void showContent() {
     ...
     }
-    
+
     private boolean otherFlag;
-   
+
     void someMethod() {
     ...
     }
-    
+
     @Override
     void showContent() {
     ...
@@ -214,7 +249,7 @@ Retrofit retrofit = new Retrofit.Builder()
 
 *Don't*: Use one giant `Constants.java`
 
-*Do*: 
+*Do*:
 ```java
 public class IntentKeys {
     public static final String LOGIN_USER = "LOGIN_USER";
@@ -279,6 +314,6 @@ follower = item.getFollowers().get(someId);
 
 ## When
 
-## Let 
+## Let
 
 ## Apply
