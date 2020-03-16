@@ -172,27 +172,49 @@ if (something)
 <tr>
 <td>
 
-```kt
+```kotlin
 // Something important
+val x = y ?: default
+```
 
+</td>
+<td>
+
+```kotlin
+//something important
+val x = y ?: default
+```
+
+</td>
+</tr>
+<tr>
+<td>
+
+```kotlin
 /*
-Something important
+  Something important
 */
+fun someComplexMethod() {
+  ...
+}
 ```
 
 
 </td>
 <td>
 
-```kotlin
-//something imporant
 
+```kotlin
 /*somthing important*/
+fun someComplexMethod() {
+  ...
+}
 ```
 
 
 </td>
 </tr>
+
 </table>
 
 
