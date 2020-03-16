@@ -11,13 +11,17 @@
 
 ## Modules And Packages Structure
 
-
 Following clean architecture guidelines our projects are split into three separate modules: Domain, Data, Presentation and App
-> Note all packages are in lower case
+
+<img src="./images/component_diagram.png" width="100%">
+
 
 
 ### App module package structure
 App module is the main application module. It must contain only your `Application` class and `Dagger` files to provide dependencies injection for the whole application
+
+> Note all packages are in lower case
+
 
 - dk.company.appname.app
   - initlizers
