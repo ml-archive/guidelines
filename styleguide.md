@@ -5,8 +5,6 @@
  - [Naming](#naming)
  - [Constants](#constants)
  - [If statements](#if-statements)
- - [Error handling](#error-handling)
- - [Kotlin](#kotlin)
 
 
 ## Modules And Packages Structure
@@ -455,17 +453,13 @@ Consider inverting the expression and returning:
 if (item != null) {
    if (item.getFollowers() != null && item.getFollowers().get(someId) != null) {
        follower = item.getFollowers().get(someId)
+     	 // do stuff with follower
    }
 }
 
 // Better
-if(item == null) {
-    return
-}
+val follower = item?.getFollowers()?.find { it.id == someId } ?: return
+// do stuff with follower
 
-if(item.getFollowers() == null || !item.getFollowers().contains(someId)) {
-    return
-}
 
-follower = item.getFollowers().get(someId)
 ```
