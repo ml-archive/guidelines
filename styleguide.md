@@ -160,6 +160,37 @@ if (something)
 
 </td>
 </tr>
+<tr>
+<td>
+
+```kotlin
+// OK
+val result = if (something) doSomething() else defaultValue
+```
+
+```kotlin
+// OK
+val result = if (condition) {
+    0
+} else {
+    1
+}
+```
+
+</td>
+<td>
+
+```kotlin
+// Not Allowed!
+val result = if (conditionA)
+                0
+            else
+                1
+```
+
+
+</td>
+</tr>
 </table>
 
 
@@ -232,17 +263,18 @@ The format is _layout_ _name_ _viewtype_ ~ `loginPasswordEt` or put another way,
 
 **File names**
 
-- list_item_name *Adapter views for listviews/recyclerviews*
- - fragment_name *Fragment views*
- - include_name  *Include layouts, try to add some context here as well i.e. include_main_toolbar or include_list_item_something_header*
- - activity_name  *Activity views*
- - dialog_name *Dialogs*
+- `item_name` *Adapter views for listviews/recyclerviews*
+ - `fragment_name`  *Fragment views*
+ - `include_name`  *Include layouts, try to add some context here as well i.e. include_main_toolbar or* `include_list_item_something_header`
+ - `activity_name`  *Activity views*
+ - `dialog_name` *Dialogs*
+ - `view_name` *Custom views layouts`
 
 
 
 ### Classes
 
- - Repositories can either be named `SomethingRepo` or `SomethingRepository`
+ - Repositories can either be name `SomethingRepository`
  - Interactors are in the format `SomethingInteractor`
  - Activities/Fragments are named `SomethingFragment` / `SomethingActivity`
  - Views/Layouts are `SomethingView` / `SomethingLayout`
@@ -448,6 +480,24 @@ when (size) {
 Following logic in a deeply nested if else mess can be hard and error prone for the next developer. There are several ways of avoiding that.
 
 Consider inverting the expression and returning:
+<table width="100%">
+<tr>
+    <th>Do</th>
+    <th>Don't</th>
+  </tr>
+<tr>
+<td>
+
+
+```kotlin
+// Better
+val follower = item?.getFollowers()?.find { it.id == someId } ?: return
+// do stuff with follower
+```
+
+</td>
+<td>
+
 ```kotlin
 // Hard to follow
 if (item != null) {
@@ -456,10 +506,25 @@ if (item != null) {
      	 // do stuff with follower
    }
 }
-
-// Better
-val follower = item?.getFollowers()?.find { it.id == someId } ?: return
-// do stuff with follower
-
-
 ```
+
+</td>
+</tr>
+
+</table>
+
+
+
+## Extension Files
+
+- Do not place all the extensions in one giant `Extension.kt` file, instead split it based on what you're extending i.e `ContextExtenstions`, `ViewExtensions`, `ModelsExtensions` and e.t.c. As the file getting bigger and bigger, consider how else it can be split into logical parts.
+- To minimize API pollution, restrict the visibility of extension functions as much as it makes sense
+- When defining extension functions that make sense only for a specific client, put them next to the code of that client.
+- As necessary, use local extension functions, member extension functions, or top-level extension functions with private visibility.
+
+
+
+## See also
+
+- [Kotlin Language Coding Convetions](https://kotlinlang.org/docs/reference/coding-conventions.html)
+- [Android - Kotling Style guide](https://developer.android.com/kotlin/style-guide)
