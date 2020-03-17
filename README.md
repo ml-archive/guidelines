@@ -15,7 +15,7 @@ Our newest template for client projects use [Google's ViewModels](https://develo
 We believe this is a much needed "standardization" of the current Android development practices that will help onboarding of new developers, but also handover to clients and general collaboration.
 
 ### MVP
-Before the switch to MVVM we used a MVP template depending on extending base presenters from our arch library. 
+Before the switch to MVVM we used a MVP template depending on extending base presenters from our arch library.
 
 **Presenters**:
 Our presenters attach to the view's lifecycle so detachment and clean up is automatically handled - similar to the many others MVP solutions out there.
@@ -33,7 +33,7 @@ We use a standard "Contract" approach with interfaces for the Presenter and View
 
 ### Dependency Injection
 
-Both our MVP and our MVVM template projects use [Dagger 2](https://github.com/google/dagger) as the dependency injection tool. 
+Both our MVP and our MVVM template projects use [Dagger 2](https://github.com/google/dagger) as the dependency injection tool.
 
 ## Stack
 
@@ -56,13 +56,13 @@ We use Retrofit for API communication (surprise)
 For image loading we usually use Glide over Picasso, since their defaults are usually less heavy in memory usage and the context lifecycle to bitmap cache freeing is also good.
 
 ### Firebase
-In general we always use Firebase for analytics and crash reporting. Sometimes we add Remote Config or in rare cases their serverless database offerings.
+In general we always use Firebase for analytics, crash reporting and apps distribution. Sometimes we add Remote Config or in rare cases their serverless database offerings.
 
 ### New Relic
 This piece of software uses an brand of reflection to look at your apps HTTP communication, intercepting errors and uploading them to a cloud interface. This should be added when we're dealing with an externally developed API.
 
 # Tools We Use
-[**Slack**](https://nodes.slack.com) is our main communication tool. 
+[**Slack**](https://nodes.slack.com) is our main communication tool.
 
 [**Jira**](https://www.atlassian.com/software/jira) is our project management tool. [**Trello**](https://www.trello.com) is also used for some internal projects and older projects not yet migrated to Jira.
 
@@ -74,9 +74,10 @@ This piece of software uses an brand of reflection to look at your apps HTTP com
 
 [**Zeplin**](https://zeplin.io/) Is the tool we use to check the Android designs of each of our projects. In Zeplin, you can see each screen in the design, get info about the sizes, margins, paddings, fonts, colours and also export assets for our app. Try to use SVG's if possible and feel free to have multiples of 8 to follow the Android design guidelines.
 
-[**Hockey**](https://www.hockeyapp.net/) Is our tool for in-house distribution.
-
 [**Firebase Crashlytics**](https://firebase.google.com/docs/crashlytics) is the current crash reporting platform. We used to use Hockey for that.
+
+[**Firebase App Distribution**](https://firebase.google.com/docs/app-distribution) is our primary tool for internal apps distribution and delivering latest test build to our clients.
+
 
 [**NStack**](https://nstack.io/) is a service we built and it is the tool we use for doing localisation. Together with the [**NStack SDK**](https://github.com/nodes-android/NStack) it offers dynamic localisation for our apps and other usefull functionalities. If you go to [nstack.io](https://nstack.io/) and select your project and translate, you will be able to add new sections with new Translations. These translations can be changed in NStack and the changes will reflect in the app without the need of an app update.
 
@@ -85,13 +86,11 @@ Make sure to read our [**Android Style Guide**](https://github.com/nodes-android
 
 
 # CI
-Our CI system is now hosted by Bitrise. We have several tools and scripts used for building and deploying.
-
- - [Gradle build plugin](https://github.com/nodes-android/ci-bitrise-gradle-plugin)
- - [Deploy bitrise step (ruby)](https://github.com/nodes-android/ci-bitrise-deploy-step)
+Our CI system is now hosted by Bitrise. Along with Firebase, Bitrise can be used to distribute our applications executables.
+We have several tools used for building and deploying.
+ - [Firebse App Distribution Step](https://github.com/guness/bitrise-step-firebase-app-distribution)
+ - [Bitrise Deploy Step](https://github.com/bitrise-steplib/steps-deploy-to-bitrise-io)
  - [Changelog step (gathering commit messages for a changelog)](https://github.com/nodes-android/ci-bitrise-changelog-step)
- 
- We have a [guide for setting up the CI](https://github.com/nodes-android/guidelines/blob/master/Bitrise.md)
 
 
 # Working at Nodes
